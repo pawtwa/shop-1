@@ -8,6 +8,7 @@ const view = `
 let isRendered = false;
 
 const about = {
+    path: '/about',
     render: async () => {
         return view
     },

@@ -1,6 +1,6 @@
-const rootApp = document.getElementById('app-root');
+import logger from './logger';
 
-const appLogger = document.getElementById('app-logger');
+const rootApp = document.getElementById('app-root');
 
 const routes = {};
 
@@ -11,7 +11,7 @@ const beforeOnNavigate = async () => {
         && typeof routes[pathname].before_destroy === 'function'
     ) {
         await routes[pathname].before_destroy(() => {
-            appLogger.innerHTML += `<p>${appLogger.childNodes.length + 1}. <strong>${pathname}</strong> before destroying!</p>`;
+            logger.addLog(`<strong>${pathname}</strong> before destroying!`);
         });
     }
 };
@@ -32,7 +32,7 @@ const router = {
             rootApp.innerHTML = await routes[pathname].render();
             if (typeof routes[pathname].after_render === 'function') {
                 await routes[pathname].after_render(() => {
-                    appLogger.innerHTML += `<p>${appLogger.childNodes.length + 1}. <strong>${pathname}</strong> after rendering!</p>`;
+                    logger.addLog(`<strong>${pathname}</strong> after rendering!`);
                 });
             }
         } else {

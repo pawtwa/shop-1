@@ -8,6 +8,7 @@ const view = `
 let isRendered = false;
 
 const contact = {
+    path: '/contact',
     render: async () => {
         return view
     },

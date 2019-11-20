@@ -3,9 +3,9 @@ import about from './../views/about';
 import contact from './../views/contact';
 
 const routes = {
-    '/': home,
-    '/about': about,
-    '/contact': contact,
+    [home.path]: home,
+    [about.path]: about,
+    [contact.path]: contact,
 };
 
 export default routes;
