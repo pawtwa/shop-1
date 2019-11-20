@@ -1,2 +1,5 @@
 import "./assets/styles/main.scss";
-require('./index.html')
+import Router from './router';
+import routes from './config/routes';
+Router.addRoutes(routes);
+Router.onNavigate(window.location.pathname);

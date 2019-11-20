@@ -7,7 +7,20 @@
     <title>Recruitment task</title>
   </head>
   <body>
-      <p>Divante Recruitment App</p>
-      <script src="./bundle.js"></script>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="return onAppNavigate('/');">Home</a></li>
+                <li><a href="#" onclick="return onAppNavigate('/about');">About</a></li>
+                <li><a href="#" onclick="return onAppNavigate('/contact');
+">Contact</a></li>
+                <li><a href="#" onclick="return onAppNavigate('/abc');
+">Abc</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="app-root"></div>
+    <div id="app-logger"></div>
+    <script src="./bundle.js"></script>
   </body>
 </html>
