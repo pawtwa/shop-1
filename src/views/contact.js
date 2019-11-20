@@ -5,27 +5,26 @@ const view = `
     </section>
 `;
 
-let isRendered = false;
-
 const contact = {
     path: '/contact',
+    isRendered: false,
     render: async () => {
         return view
     },
-    after_render: async (callback) => {
-        isRendered = true;
+    after_render: async function (callback) {
+        this.isRendered = true;
         if (typeof callback === 'function') {
-            callback();
+            await callback();
         }
     },
-    before_destroy: async (callback) => {
-        if (!isRendered) {
+    before_destroy: async function (callback) {
+        if (!this.isRendered) {
             return;
         }
         if (typeof callback === 'function') {
-            callback();
+            await callback();
         }
-        isRendered = false;
+        this.isRendered = false;
     }
 };
 
