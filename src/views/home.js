@@ -1,9 +1,4 @@
-const view = `
-    <section class="section section-home">
-        <h1> Home </h1>
-        <ul></ul>
-    </section>
-`;
+const view = require('./home.html');
 
 const home = {
     path: '/',

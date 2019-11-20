@@ -1,15 +1,10 @@
-const view = `
-    <section class="section section-contact">
-        <h1> Contact </h1>
-        <ul></ul>
-    </section>
-`;
+const view = require('./contact.html');
 
 const contact = {
     path: '/contact',
     isRendered: false,
     render: async () => {
-        return view
+        return view;
     },
     after_render: async function (callback) {
         this.isRendered = true;
