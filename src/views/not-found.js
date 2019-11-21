@@ -1,9 +1,9 @@
 import viewFactory from '../factories/view';
 
-const view = require('./contact.html');
+const view = require('./not-found.html');
 
-const contact = viewFactory({
-    path: '/contact',
+const notFound = viewFactory({
+    path: '**',
     view,
     after_render: async function () {
     },
@@ -11,4 +11,4 @@ const contact = viewFactory({
     }
 });
 
-export default contact;
+export default notFound;

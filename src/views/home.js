@@ -1,26 +1,14 @@
+import viewFactory from '../factories/view';
+
 const view = require('./home.html');
 
-const home = {
+const home = viewFactory({
     path: '/',
-    isRendered: false,
-    render: async () => {
-        return view;
+    view,
+    after_render: async function () {
     },
-    after_render: async function (callback) {
-        this.isRendered = true;
-        if (typeof callback === 'function') {
-            await callback();
-        }
-    },
-    before_destroy: async function (callback) {
-        if (!this.isRendered) {
-            return;
-        }
-        if (typeof callback === 'function') {
-            await callback();
-        }
-        this.isRendered = false;
+    before_destroy: async function () {
     }
-};
+});
 
 export default home;

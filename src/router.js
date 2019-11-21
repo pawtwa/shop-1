@@ -8,9 +8,8 @@ const beforeOnNavigate = async () => {
     const pathname = window.location.pathname;
     if (
         typeof routes[pathname] !== 'undefined'
-        && typeof routes[pathname].before_destroy === 'function'
     ) {
-        await routes[pathname].before_destroy(() => {
+        await routes[pathname]._before_destroy(() => {
             logger.addLog(`<strong>${pathname}</strong> before destroying!`);
         });
     }
@@ -22,6 +21,13 @@ const router = {
         console.log('routes', routes);
     },
     onNavigate: async (pathname) => {
+        if (
+            pathname === window.location.pathname
+            && typeof routes[pathname] !== 'undefined'
+            && routes[pathname].isRendered
+        ) {
+            return;
+        }
         await beforeOnNavigate();
         window.history.pushState(
             {},
@@ -30,13 +36,16 @@ const router = {
         );
         if (typeof routes[pathname] !== 'undefined') {
             rootApp.innerHTML = await routes[pathname].render();
-            if (typeof routes[pathname].after_render === 'function') {
-                await routes[pathname].after_render(() => {
-                    logger.addLog(`<strong>${pathname}</strong> after rendering!`);
-                });
-            }
+            await routes[pathname]._after_render(() => {
+                logger.addLog(`<strong>${pathname}</strong> after rendering!`);
+            });
+        } else if (typeof routes['**'] !== 'undefined') {
+            rootApp.innerHTML = await routes['**'].render();
+            await routes['**']._after_render(() => {
+                logger.addLog(`<strong>${pathname}</strong> after rendering!`);
+            });
         } else {
-            rootApp.innerHTML = 'Page Not Found!';
+            rootApp.innerHTML = 'Not Found.';
         }
     }
 };
