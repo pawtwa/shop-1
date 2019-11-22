@@ -20,20 +20,28 @@ const beforeOnNavigate = async () => {
     }
 };
 
+let routerIsBusy = false;
+
 const router = {
     addRoutes: (config) => {
         Object.assign(routes, config);
     },
     onNavigate: async (pathname) => {
-        await hooks.beforeOnNavigate.forEach(callback => callback(pathname));
         if (
-            pathname === window.location.pathname
-            && typeof routes[pathname] !== 'undefined'
-            && routes[pathname].isRendered
+            routerIsBusy
+            || (
+                pathname === window.location.pathname
+                && typeof routes[pathname] !== 'undefined'
+                && routes[pathname].isRendered
+            )
         ) {
             return;
         }
+        routerIsBusy = true;
         await beforeOnNavigate();
+        for (let callback of hooks.beforeOnNavigate) {
+            await callback(pathname);
+        }
         window.history.pushState(
             {},
             pathname,
@@ -52,7 +60,10 @@ const router = {
         } else {
             appMain.innerHTML = 'Not Found.';
         }
-        await hooks.afterOnNavigate.forEach(callback => callback(pathname));
+        for (let callback of hooks.afterOnNavigate) {
+            await callback(pathname);
+        }
+        routerIsBusy = false;
     },
     addRouterHook: async (type, callback) => {
         if (typeof hooks[type] !== 'object') {
