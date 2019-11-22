@@ -7,19 +7,30 @@
     <title>Recruitment task</title>
   </head>
   <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="return onAppNavigate('/');">Home</a></li>
-                <li><a href="#" onclick="return onAppNavigate('/about');">About</a></li>
-                <li><a href="#" onclick="return onAppNavigate('/contact');
+    <header id="app-header">
+        <nav id="app-nav">
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" id="burger-menu">
+                <img src="./assets/images/menu-512.png" alt="">
+            </label>
+            <div class="left-menu"></div>
+            <div class="center-menu">
+                <img class="logo" src="./assets/images/logo.png">
+            </div>
+            <div class="right-menu">
+                <ul>
+                    <li><a href="#" data-href="/" onclick="return onAppNavigate(this);">Home</a></li>
+                    <li><a href="#" data-href="/about" onclick="return onAppNavigate(this);">About</a></li>
+                    <li><a href="#" data-href="/contact" onclick="return onAppNavigate(this);
 ">Contact</a></li>
-                <li><a href="#" onclick="return onAppNavigate('/abc');
+                    <li><a href="#" data-href="/abc" onclick="return onAppNavigate(this);
 ">Abc</a></li>
-            </ul>
+                </ul>
+            </div>
         </nav>
     </header>
-    <div id="app-root"></div>
+    <main id="app-main"></main>
+    <footer id="app-footer"></footer>
     <script src="./bundle.js"></script>
   </body>
 </html>

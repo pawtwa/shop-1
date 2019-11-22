@@ -1,8 +1,13 @@
-import logger from './logger';
+import logger from '../logger';
 
-const rootApp = document.getElementById('app-root');
+const appMain = document.getElementById('app-main');
 
 const routes = {};
+
+const plugins = {
+    beforeOnNavigate: [],
+    afterOnNavigate: []
+};
 
 const beforeOnNavigate = async () => {
     const pathname = window.location.pathname;
@@ -18,9 +23,9 @@ const beforeOnNavigate = async () => {
 const router = {
     addRoutes: (config) => {
         Object.assign(routes, config);
-        console.log('routes', routes);
     },
     onNavigate: async (pathname) => {
+        plugins.beforeOnNavigate.forEach(callback => callback(pathname));
         if (
             pathname === window.location.pathname
             && typeof routes[pathname] !== 'undefined'
@@ -35,23 +40,35 @@ const router = {
             window.location.origin + pathname
         );
         if (typeof routes[pathname] !== 'undefined') {
-            rootApp.innerHTML = await routes[pathname].render();
+            appMain.innerHTML = await routes[pathname].render();
             await routes[pathname]._after_render(() => {
                 logger.addLog(`<strong>${pathname}</strong> after rendering!`);
             });
         } else if (typeof routes['**'] !== 'undefined') {
-            rootApp.innerHTML = await routes['**'].render();
+            appMain.innerHTML = await routes['**'].render();
             await routes['**']._after_render(() => {
                 logger.addLog(`<strong>${pathname}</strong> after rendering!`);
             });
         } else {
-            rootApp.innerHTML = 'Not Found.';
+            appMain.innerHTML = 'Not Found.';
         }
+        plugins.afterOnNavigate.forEach(callback => callback(pathname));
+    },
+    addRouterPlugin: async (type, callback) => {
+        if (typeof plugins[type] !== 'object') {
+            console.error(`Router plugin type '${type}' not exists.`);
+            return;
+        }
+        if (typeof callback !== 'function') {
+            console.error(`Router plugin callback for '${type}' is not a function.`, callback);
+            return;
+        }
+        plugins[type].push(callback);
     }
 };
 
-window['onAppNavigate'] = (pathname) => {
-    router.onNavigate(pathname);
+window['onAppNavigate'] = (element) => {
+    router.onNavigate(element.getAttribute('data-href'));
     return false;
 };
 
