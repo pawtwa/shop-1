@@ -4,7 +4,7 @@ const appMain = document.getElementById('app-main');
 
 const routes = {};
 
-const plugins = {
+const hooks = {
     beforeOnNavigate: [],
     afterOnNavigate: []
 };
@@ -25,7 +25,7 @@ const router = {
         Object.assign(routes, config);
     },
     onNavigate: async (pathname) => {
-        plugins.beforeOnNavigate.forEach(callback => callback(pathname));
+        await hooks.beforeOnNavigate.forEach(callback => callback(pathname));
         if (
             pathname === window.location.pathname
             && typeof routes[pathname] !== 'undefined'
@@ -52,10 +52,10 @@ const router = {
         } else {
             appMain.innerHTML = 'Not Found.';
         }
-        plugins.afterOnNavigate.forEach(callback => callback(pathname));
+        await hooks.afterOnNavigate.forEach(callback => callback(pathname));
     },
-    addRouterPlugin: async (type, callback) => {
-        if (typeof plugins[type] !== 'object') {
+    addRouterHook: async (type, callback) => {
+        if (typeof hooks[type] !== 'object') {
             console.error(`Router plugin type '${type}' not exists.`);
             return;
         }
@@ -63,7 +63,7 @@ const router = {
             console.error(`Router plugin callback for '${type}' is not a function.`, callback);
             return;
         }
-        plugins[type].push(callback);
+        hooks[type].push(callback);
     }
 };
 
