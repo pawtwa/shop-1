@@ -19,6 +19,7 @@ const beforeOnNavigate = async (newView, newRouteMatched, newPathname) => {
 
 const afterOnNavigate = async (view, routeMatched, pathname) => {
     Object.assign(currentRoute, {view, routeMatched, pathname});
+    document.getElementById('app-container').classList.add('show');
 };
 
 const setRouteContent = async (newView, routeMatched, pathname) => {

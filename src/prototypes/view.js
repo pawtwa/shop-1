@@ -8,6 +8,7 @@ const view = {
     isChild: false,
     isRendered: false,
     params: {},
+    data: {},
     view: '--- FILL IT ---',
     renderingParams: {},
     childrenNestedData: [],
@@ -16,7 +17,9 @@ const view = {
         let view = null;
         if (!this.isRendered) {
             await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> rendering!`);
-            view = `${this.view}`;
+            if (this.view) {
+                view = `${this.view}`;
+            }
         }
         await this.renderDeep(routeMatched, pathname, parentPath);
         return view;
@@ -58,9 +61,10 @@ const view = {
             this.isRendered = true;
             if (typeof this['after_render'] === 'function') {
                 await this['after_render']();
+                await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> after_render during afterRendering!`);
             }
         }
-        await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> after rendering!`);
+        await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> end afterRendering!`);
     },
     afterRenderDeep: async function () {
         if (this.isChild) {
@@ -74,13 +78,17 @@ const view = {
     },
     destroy: async function (newView, newRouteMatched, newPathname) {
         await this.destroyDeep(newView, newRouteMatched, newPathname);
-        if (this.isRendered && (this.isChild || !newView || this.name !== newView.name)) {
+        if (this.isRendered) {
+            if (this.isChild || !newView || this.name !== newView.name) {
+                this.data = {};
+                this.isRendered = false;
+            }
             if (typeof this['before_destroy'] === 'function') {
                 await this['before_destroy'](newView, newRouteMatched, newPathname);
+                await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> before_destroy during destroying!`);
             }
-            this.isRendered = false;
         }
-        await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> before destroying!`);
+        await logger.addLog(`VIEW <strong>${this.name}</strong> for path <strong>${this.renderingParams.pathname}</strong> as route <strong>${this.renderingParams.routeMatched}</strong> end destroying!`);
         this.renderingParams = {};
         this.childrenNestedData = [];
     },

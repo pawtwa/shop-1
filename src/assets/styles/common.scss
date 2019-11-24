@@ -1,4 +1,9 @@
-$main-color: deepskyblue;
+#app-container {
+  &.show {
+    transition: opacity 500ms;
+    opacity: 1 !important;
+  }
+}
 
 #app-header {
   width: 100%;
@@ -61,29 +66,6 @@ $main-color: deepskyblue;
   }
 }
 
-@media only screen and (max-width: 1025px) {
-  #burger-menu {
-    display: inline-block;
-  }
-
-  #app-nav {
-    .left-menu, .right-menu {
-      display: none;
-    }
-  }
-
-  #nav-toggle:checked ~ .right-menu {
-    display: grid;
-    grid-row: 2;
-    grid-column-start: 1;
-    grid-column-end: 4;
-
-    ul {
-      justify-content: flex-start;
-    }
-  }
-}
-
 #app-logger {
   font-family: monospace;
   position: fixed;
@@ -94,6 +76,7 @@ $main-color: deepskyblue;
   overflow-y: auto;
   background-color: peru;
   transition: height 350ms;
+  z-index: 9999999999999;
 
   * {
     padding-left: 15px;
@@ -174,6 +157,7 @@ $main-color: deepskyblue;
   height: 100%;
   background: rgba(grey, 0.5);
   display: none;
+  opacity: 1 !important;
 
   &.show {
     display: flex;
@@ -203,4 +187,27 @@ main {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
+}
+
+@media only screen and (max-width: 1025px) {
+  #burger-menu {
+    display: inline-block;
+  }
+
+  #app-nav {
+    .left-menu, .right-menu {
+      display: none;
+    }
+  }
+
+  #nav-toggle:checked ~ .right-menu {
+    display: grid;
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    ul {
+      justify-content: flex-start;
+    }
+  }
 }

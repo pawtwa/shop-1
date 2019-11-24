@@ -10,30 +10,32 @@
     <div id="app-overlay">
         <div class="loaders ring root"><div></div><div></div><div></div><div></div></div>
     </div>
-    <header id="app-header">
-        <nav id="app-nav">
-            <input type="checkbox" id="nav-toggle">
-            <label for="nav-toggle" id="burger-menu">
-                <img src="/assets/images/menu-512.png" alt="">
-            </label>
-            <div class="left-menu"></div>
-            <div class="center-menu">
-                <a href="#" data-href="/" onclick="return onAppNavigate(this);"><img class="logo" src="/assets/images/logo.png"></a>
-            </div>
-            <div class="right-menu">
-                <ul>
-                    <li><a href="#" data-href="/" onclick="return onAppNavigate(this);">Home</a></li>
-                    <li><a href="#" data-href="/about" onclick="return onAppNavigate(this);">About</a></li>
-                    <li><a href="#" data-href="/contact" onclick="return onAppNavigate(this);
+    <div id="app-container" style="opacity: 0;">
+        <header id="app-header">
+            <nav id="app-nav">
+                <input type="checkbox" id="nav-toggle">
+                <label for="nav-toggle" id="burger-menu">
+                    <img src="/assets/images/menu-512.png" alt="">
+                </label>
+                <div class="left-menu"></div>
+                <div class="center-menu">
+                    <a href="#" data-href="/" onclick="return onAppNavigate(this);"><img class="logo" src="/assets/images/logo.png"></a>
+                </div>
+                <div class="right-menu">
+                    <ul>
+                        <li><a href="#" data-href="/" onclick="return onAppNavigate(this);">Home</a></li>
+                        <li><a href="#" data-href="/about" onclick="return onAppNavigate(this);">About</a></li>
+                        <li><a href="#" data-href="/contact" onclick="return onAppNavigate(this);
 ">Contact</a></li>
-                    <li><a href="#" data-href="/abc" onclick="return onAppNavigate(this);
+                        <li><a href="#" data-href="/abc" onclick="return onAppNavigate(this);
 ">Abc</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main id="app-main"></main>
-    <footer id="app-footer"></footer>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main id="app-main"></main>
+        <footer id="app-footer"></footer>
+    </div>
     <script src="/bundle.js"></script>
   </body>
 </html>
