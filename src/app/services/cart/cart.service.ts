@@ -1,34 +1,35 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class CartService {
+    private cart: any[] = [];
 
-  private cart: any[] = [];
+    private cart$ = new BehaviorSubject<any[]>(this.cart);
 
-  private cart$ = new BehaviorSubject<any[]>(this.cart);
+    constructor() {}
 
-  constructor() {
-  }
-
-  public add(item: any) {
-    let cartItemIndex = this.cart.findIndex((cartItem: any): boolean => cartItem.productId === item.id);
-    let cartItem = cartItemIndex >= 0
-      ? {...this.cart[cartItemIndex]}
-      : {productId: item.id, title: item.title, amount: 0};
-    ++cartItem.amount;
-    this.cart = [...this.cart];
-    if (cartItemIndex >= 0) {
-      this.cart[cartItemIndex] = cartItem;
-    } else {
-      this.cart.push(cartItem);
+    public add(item: any) {
+        let cartItemIndex = this.cart.findIndex(
+            (cartItem: any): boolean => cartItem.productId === item.id,
+        );
+        let cartItem =
+            cartItemIndex >= 0
+                ? {...this.cart[cartItemIndex]}
+                : {productId: item.id, title: item.title, amount: 0};
+        ++cartItem.amount;
+        this.cart = [...this.cart];
+        if (cartItemIndex >= 0) {
+            this.cart[cartItemIndex] = cartItem;
+        } else {
+            this.cart.push(cartItem);
+        }
+        this.cart$.next(this.cart);
     }
-    this.cart$.next(this.cart);
-  }
 
-  public get(): Observable<any[]> {
-    return this.cart$.asObservable();
-  }
+    public get(): Observable<any[]> {
+        return this.cart$.asObservable();
+    }
 }

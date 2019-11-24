@@ -1,18 +1,32 @@
 <nav id="app-nav">
-  <input type="checkbox" id="nav-toggle">
-  <label for="nav-toggle" id="burger-menu">
-    <img src="/assets/images/menu-512.png" alt="">
-  </label>
-  <div class="left-menu"></div>
-  <div class="center-menu">
-    <a routerLink="/" routerLinkActive="active"><img class="logo" src="/assets/images/logo.png"></a>
-  </div>
-  <div class="right-menu">
-    <ul>
-      <li><a href="/" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-      <li><a href="/about" routerLink="/about" routerLinkActive="active">About</a></li>
-      <li><a href="/contact" routerLink="/contact" routerLinkActive="active">Contact</a></li>
-      <li><a href="/not-found" routerLink="/not-found" routerLinkActive="active">Not Found Example</a></li>
-    </ul>
-  </div>
+    <input type="checkbox" id="nav-toggle" />
+    <label for="nav-toggle" id="burger-menu">
+        <img src="/assets/images/menu-512.png" alt="" />
+    </label>
+    <div class="left-menu"></div>
+    <div class="center-menu">
+        <a routerLink="/" routerLinkActive="active"
+            ><img class="logo" src="/assets/images/logo.png"
+        /></a>
+    </div>
+    <div class="right-menu">
+        <ul>
+            <li>
+                <a
+                    href="/"
+                    routerLink="/"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    >Home</a
+                >
+            </li>
+            <li><a href="/about" routerLink="/about" routerLinkActive="active">About</a></li>
+            <li><a href="/contact" routerLink="/contact" routerLinkActive="active">Contact</a></li>
+            <li>
+                <a href="/not-found" routerLink="/not-found" routerLinkActive="active"
+                    >Not Found Example</a
+                >
+            </li>
+        </ul>
+    </div>
 </nav>

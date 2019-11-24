@@ -1,7 +1,12 @@
 <div id="app-overlay" [class.show]="showLoader">
-  <div class="loaders ring root"><div></div><div></div><div></div><div></div></div>
+    <div class="loaders ring root">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 <app-header></app-header>
 <main id="app-main">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </main>

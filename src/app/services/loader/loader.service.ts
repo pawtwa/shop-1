@@ -1,32 +1,31 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Observer, timer} from "rxjs";
+import {BehaviorSubject, Observable, Observer, timer} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class LoaderService {
+    counter = 0;
 
-  counter = 0;
+    private showLoader = new BehaviorSubject<boolean>(false);
 
-  private showLoader = new BehaviorSubject<boolean>(false);
+    constructor() {}
 
-  constructor() { }
-
-  public show(): void {
-    if (this.counter < 1) {
-      this.showLoader.next(true);
+    public show(): void {
+        if (this.counter < 1) {
+            this.showLoader.next(true);
+        }
+        this.counter++;
     }
-    this.counter++;
-  }
 
-  public hide(): void {
-    this.counter--;
-    if (this.counter < 1) {
-      this.showLoader.next(false);
+    public hide(): void {
+        this.counter--;
+        if (this.counter < 1) {
+            this.showLoader.next(false);
+        }
     }
-  }
 
-  public get(): Observable<boolean> {
-    return this.showLoader.asObservable();
-  }
+    public get(): Observable<boolean> {
+        return this.showLoader.asObservable();
+    }
 }

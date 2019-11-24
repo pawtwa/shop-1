@@ -1,24 +1,23 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-cart-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+    selector: 'app-cart-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit, OnDestroy {
+    @Input()
+    public product: any;
 
-  @Input()
-  public product: any;
+    private destroyed$ = new Subject<void>();
 
-  private destroyed$ = new Subject<void>();
+    constructor() {}
 
-  constructor() { }
+    ngOnInit(): void {}
 
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    this.destroyed$.next()
-    this.destroyed$.unsubscribe()
-  }
+    ngOnDestroy(): void {
+        this.destroyed$.next();
+        this.destroyed$.unsubscribe();
+    }
 }

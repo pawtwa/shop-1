@@ -1,8 +1,13 @@
 <ng-container *ngIf="product">
-  <div class="on-hover">
-    <a class="details unselectable" [href]="'/product' + product.id" [routerLink]="['/product', product.id]">Details</a>
-  </div>
-  <img class="img" [src]="product.image">
-  <h3 class="title">{{product.title}}</h3>
-  <p class="description">{{product.description}}</p>
+    <div class="on-hover">
+        <a
+            class="details unselectable"
+            [href]="'/product' + product.id"
+            [routerLink]="['/product', product.id]"
+            >Details</a
+        >
+    </div>
+    <img class="img" [src]="product.image" />
+    <h3 class="title">{{ product.title }}</h3>
+    <p class="description">{{ product.description }}</p>
 </ng-container>
