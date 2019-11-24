@@ -1,0 +1,33 @@
+@import 'src/private/styles/variables';
+
+:host {
+    width: 600px;
+}
+
+#app-contact {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: 30px;
+
+    &.route-main-content {
+        width: 100%;
+    }
+
+    .head {
+        color: $main-color;
+        text-align: center;
+    }
+
+    .text {
+        font-style: normal;
+        line-height: 1.5;
+        p {
+            text-align: center;
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+    }
+}
