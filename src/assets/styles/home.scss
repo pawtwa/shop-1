@@ -1,0 +1,112 @@
+#app-home {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-column-gap: 15px;
+
+  #cart {
+    padding: 10px;
+    background-color: $main-color;
+    max-height: 400px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    * {
+      color: white;
+    }
+
+    .cart-items {
+      padding: 10px;
+      border: white 2px dashed;
+
+      > div {
+        padding: 4px 8px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+      }
+    }
+  }
+
+  #products {
+    .product, .products-list {
+      display: grid;
+      grid-column-gap: 25px;
+      grid-row-gap: 15px;
+
+      > div {
+        position: relative;
+
+        .img {
+          max-width: 100%;
+        }
+
+        .title, .description {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .on-hover {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          width: 100%;
+          height: 0;
+          margin: 0;
+          padding: 0;
+          transition: height 250ms;
+          background-color: rgba($main-color, .35);
+          overflow: hidden;
+
+          .details, .add-to-cart {
+            display: inline-block;
+            cursor: pointer;
+            padding: 10px;
+            background-color: $main-color;
+            color: white;
+            transition: opacity 75ms;
+            opacity: 1;
+
+            &:active {
+              opacity: .75;
+            }
+          }
+        }
+
+        &:hover {
+          .on-hover {
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    .product {
+      grid-template-columns: 1fr;
+    }
+
+    .products-list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  #app-home {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #app-home {
+    #products {
+      .products-list {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 25px;
+        grid-row-gap: 15px;
+      }
+    }
+  }
+}
