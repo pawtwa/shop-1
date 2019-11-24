@@ -26,4 +26,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         this.destroyed$.next();
         this.destroyed$.unsubscribe();
     }
+
+    public trackByFn(index: number, item: any) {
+        return item.id;
+    }
 }

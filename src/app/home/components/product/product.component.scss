@@ -1,5 +1,17 @@
 @import 'src/private/styles/variables';
 
+:host {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 500ms, opacity 500ms;
+
+    &.filled {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
 #product {
     display: grid;
     grid-column-gap: 25px;

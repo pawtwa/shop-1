@@ -1,7 +1,7 @@
 <section id="products" class="section section-home">
     <ng-container *ngIf="products && products.length">
         <app-product-list-item
-            *ngFor="let product of products"
+            *ngFor="let product of products; trackBy: trackByFn"
             [product]="product"
         ></app-product-list-item>
     </ng-container>

@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
+import {Subject, timer} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 
 import {ProductsService} from '../../../services/products/products.service';
@@ -13,6 +13,8 @@ import {CartService} from '../../../services/cart/cart.service';
 })
 export class ProductComponent implements OnInit, OnDestroy {
     public product: any;
+
+    @HostBinding('class.filled') filled = false;
 
     private destroyed$ = new Subject<void>();
 
@@ -38,5 +40,13 @@ export class ProductComponent implements OnInit, OnDestroy {
     public addToCart(event: MouseEvent) {
         event.preventDefault();
         this.cartService.add({...this.product});
+    }
+
+    imageLoad() {
+        this.markFilled(!!this.product);
+    }
+
+    private markFilled(filled: boolean) {
+        this.filled = filled;
     }
 }

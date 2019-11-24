@@ -3,6 +3,9 @@
 :host {
     position: relative;
     display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 500ms, opacity 500ms;
 
     .img {
         max-width: 100%;
@@ -47,5 +50,10 @@
         .on-hover {
             height: 100%;
         }
+    }
+
+    &.filled {
+        visibility: visible;
+        opacity: 1;
     }
 }
