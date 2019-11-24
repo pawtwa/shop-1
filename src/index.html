@@ -7,15 +7,18 @@
     <title>Recruitment task</title>
   </head>
   <body>
+    <div id="app-overlay">
+        <div class="loaders ring root"><div></div><div></div><div></div><div></div></div>
+    </div>
     <header id="app-header">
         <nav id="app-nav">
             <input type="checkbox" id="nav-toggle">
             <label for="nav-toggle" id="burger-menu">
-                <img src="./assets/images/menu-512.png" alt="">
+                <img src="/assets/images/menu-512.png" alt="">
             </label>
             <div class="left-menu"></div>
             <div class="center-menu">
-                <a href="#" data-href="/" onclick="return onAppNavigate(this);"><img class="logo" src="./assets/images/logo.png"></a>
+                <a href="#" data-href="/" onclick="return onAppNavigate(this);"><img class="logo" src="/assets/images/logo.png"></a>
             </div>
             <div class="right-menu">
                 <ul>
@@ -31,6 +34,6 @@
     </header>
     <main id="app-main"></main>
     <footer id="app-footer"></footer>
-    <script src="./bundle.js"></script>
+    <script src="/bundle.js"></script>
   </body>
 </html>
