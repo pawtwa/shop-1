@@ -9,6 +9,7 @@ import {ProductComponent as ProductCartComponent} from './components/cart/produc
 import {ProductComponent} from './components/product/product.component';
 import {ProductListItemComponent} from './components/products-list/product-list-item/product-list-item.component';
 import {TruncateTextPipe} from '../pipes/truncate-text/truncate-text.pipe';
+import {ContactWidgetComponent} from './components/contact-widget/contact-widget.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import {TruncateTextPipe} from '../pipes/truncate-text/truncate-text.pipe';
         ProductComponent,
         ProductListItemComponent,
         TruncateTextPipe,
+        ContactWidgetComponent,
     ],
     imports: [CommonModule, HomeRoutingModule],
     entryComponents: [],

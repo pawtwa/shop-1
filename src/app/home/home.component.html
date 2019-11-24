@@ -1,6 +1,13 @@
 <div id="app-home" class="route-main-content">
     <aside>
-        <app-cart></app-cart>
+        <div class="widgets">
+            <div class="widget">
+                <app-contact-widget></app-contact-widget>
+            </div>
+            <div class="widget">
+                <app-cart class="widget"></app-cart>
+            </div>
+        </div>
     </aside>
     <router-outlet name="home"></router-outlet>
 </div>
