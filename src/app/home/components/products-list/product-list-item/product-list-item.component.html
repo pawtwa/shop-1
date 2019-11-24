@@ -9,5 +9,5 @@
     </div>
     <img class="img" [src]="product.image" />
     <h3 class="title">{{ product.title }}</h3>
-    <p class="description">{{ product.description }}</p>
+    <p class="description">{{ product.description | truncateText: 25 }}</p>
 </ng-container>
