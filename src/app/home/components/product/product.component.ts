@@ -1,9 +1,9 @@
 import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
-import {Subject, timer} from 'rxjs';
-import {ActivatedRoute, Params} from '@angular/router';
+import {Subject} from 'rxjs';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
 
 import {ProductsService} from '../../../services/products/products.service';
-import {takeUntil} from 'rxjs/operators';
 import {CartService} from '../../../services/cart/cart.service';
 
 @Component({
@@ -22,12 +22,16 @@ export class ProductComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private productsService: ProductsService,
         private cartService: CartService,
+        private router: Router,
     ) {}
 
     ngOnInit() {
         this.activatedRoute.params.pipe(takeUntil(this.destroyed$)).subscribe((params: Params) => {
             this.productsService.getProduct(+params.id).subscribe((product: any) => {
                 this.product = product;
+                if (!this.product) {
+                    this.router.navigate(['not-found']).then();
+                }
             });
         });
     }
