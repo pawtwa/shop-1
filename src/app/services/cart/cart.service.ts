@@ -14,7 +14,6 @@ export class CartService {
   }
 
   public add(item: any) {
-    console.log(this.cart, item);
     let cartItemIndex = this.cart.findIndex((cartItem: any): boolean => cartItem.productId === item.id);
     let cartItem = cartItemIndex >= 0
       ? {...this.cart[cartItemIndex]}
