@@ -1,0 +1,10 @@
+<section id="product" class="section section-home">
+  <ng-container *ngIf="product">
+    <div class="on-hover">
+      <a class="add-to-cart unselectable" href="#" (click)="addToCart($event)">Add to Cart</a>
+    </div>
+    <img class="img" [src]="product.image">
+    <h3 class="title">{{product.title}}</h3>
+    <p class="description">{{product.description}}</p>
+  </ng-container>
+</section>

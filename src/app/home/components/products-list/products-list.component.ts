@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subject} from "rxjs";
+import {ProductsService} from "../../../services/products/products.service";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  public products: any[];
 
-  ngOnInit() {
+  private destroyed$ = new Subject<void>();
+
+  constructor(private productsService: ProductsService) { }
+
+  ngOnInit(): void {
+    this.productsService.getProducts()
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((products: any[]) => this.products = products);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.unsubscribe();
   }
 
 }
