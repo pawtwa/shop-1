@@ -146,26 +146,6 @@
   }
 }
 
-#app-overlay {
-  position: fixed;
-  margin: 0;
-  padding: 0;
-  top: 0;
-  left: 0;
-  z-index: 99999999;
-  width: 100%;
-  height: 100%;
-  background: rgba(grey, 0.5);
-  display: none;
-  opacity: 1 !important;
-
-  &.show {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
 main {
   display: flex;
   justify-content: center;
