@@ -1,13 +1,7 @@
-import {
-    HttpEvent,
-    HttpHandler,
-    HttpInterceptor,
-    HttpRequest,
-    HttpResponse,
-} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, timer} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {delay, tap} from 'rxjs/operators';
 
 import {LoaderService} from './services/loader/loader.service';
 
@@ -19,10 +13,9 @@ export class AppInterceptor implements HttpInterceptor {
         this.loaderService.show();
         // req = req.clone({});
         return next.handle(req).pipe(
+            delay(500),
             tap((response: HttpEvent<any>) => {
-                if (response instanceof HttpResponse) {
-                    timer(750).subscribe(() => this.loaderService.hide());
-                }
+                this.loaderService.hide();
             }),
         );
     }
